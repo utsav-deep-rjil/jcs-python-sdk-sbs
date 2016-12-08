@@ -7,7 +7,7 @@ class DescribeVolumesRequest(JCSRequest):
         self._next_token = None
         self._max_results = None
         self._detail = None
-        super(DescribeVolumesRequest,self).__init__()
+        super(DescribeVolumesRequest, self).__init__()
 
     @property
     def volume_ids(self):
@@ -63,7 +63,8 @@ class DescribeVolumesRequest(JCSRequest):
         
     def __str__(self):
         to_string = '{"volume_ids":"%s","next_token":"%s","max_results":"%s","detail":"%s"}'\
-        % (str(self.volume_ids),self.next_token,self.max_results,self.detail)
+        % (str(self.volume_ids), self.next_token, self.max_results, self.detail)
         to_string = to_string.replace('"None"', "null")
+        to_string = to_string.replace("None", "null")
         return to_string
     

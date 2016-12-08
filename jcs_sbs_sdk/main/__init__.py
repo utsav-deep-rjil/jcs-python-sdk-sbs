@@ -59,8 +59,7 @@ print_request_response(request, response)
 print("*****************describe snapshots*******************")
 
 request = DescribeSnapshotsRequest()
-request.detail = False
-request.snapshot_ids = ["44240421-ec5c-4b8b-811b-3a69d71170b8", "0ae7365d-6013-4763-bcda-05251a5599d4"]
+request.detail = True
 print_json(request)
 response = jcs.describe_snapshots(request)
 print(response.xml)

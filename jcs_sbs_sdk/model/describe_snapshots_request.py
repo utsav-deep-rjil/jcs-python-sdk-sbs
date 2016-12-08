@@ -8,7 +8,7 @@ class DescribeSnapshotsRequest(JCSRequest):
         self._next_token = None
         self._max_results = None
         self._detail = None
-        super(DescribeSnapshotsRequest,self).__init__()
+        super(DescribeSnapshotsRequest, self).__init__()
 
     @property
     def snapshot_ids(self):
@@ -64,6 +64,8 @@ class DescribeSnapshotsRequest(JCSRequest):
         
     def __str__(self):
         to_string = '{"snapshot_ids": %s,"next_token":"%s","max_results":"%s","detail":"%s"}'\
-             % (str(self.snapshot_ids),self.next_token,self.max_results,self.detail)
+             % (str(self.snapshot_ids), self.next_token, self.max_results, self.detail)
+        to_string = to_string.replace('"None"', "null")
+        to_string = to_string.replace("None", "null")
         return to_string.replace("'", '"')
     

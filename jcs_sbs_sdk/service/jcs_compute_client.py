@@ -182,7 +182,7 @@ class JCSComputeClient(JCSHttpClient):
                         snapshot.volume_id = str(snapshot_eo.volumeId)
                         snapshot.status = str(snapshot_eo.status)
                         if hasattr(snapshot_eo, "startTime"):
-                            snapshot.create_time = datetime.strptime(str(snapshot_eo.startTime), constants.RESPONSE_DATE_TIME_FORMAT)
+                            snapshot.start_time = datetime.strptime(str(snapshot_eo.startTime), constants.RESPONSE_DATE_TIME_FORMAT)
                         if hasattr(snapshot_eo, "volumeSize"):
                             snapshot.volume_size = int(snapshot_eo.volumeSize)
                         snapshot.snapshot_id = str(snapshot_eo.snapshotId)
