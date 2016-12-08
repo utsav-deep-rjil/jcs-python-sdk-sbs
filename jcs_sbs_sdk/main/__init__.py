@@ -33,36 +33,34 @@ def print_json(inp_str):
     print json.dumps(parsed, indent=4)
 
 def print_request_response(request,response):
-    print("Request is:")
+    print("\nRequest object in JSON is:")
     print_json(request)
-    print("Response is:")
+    print("\nAPI response XML is:")
+    print(response.xml)
+    print("\nSDK Response object in JSON is:")
     print_json(response)
  
-print("*****************describe volumes*******************")
+print("\n*****************describe volumes*******************")
  
 request = DescribeVolumesRequest()
 request.detail = True
 response = jcs.describe_volumes(request)
-print(response.xml)
 print_request_response(request, response)
  
-print("*****************create volume*******************")
+print("\n*****************create volume*******************")
  
 request = CreateVolumeRequest()
 request.size = 10
 response = jcs.create_volume(request)
 volume_id = response.volume.volume_id
-print(response.xml)
 print_request_response(request, response)
 
 
-print("*****************describe snapshots*******************")
+print("\n*****************describe snapshots*******************")
 
 request = DescribeSnapshotsRequest()
 request.detail = True
-print_json(request)
 response = jcs.describe_snapshots(request)
-print(response.xml)
 print_request_response(request, response)
 
   
@@ -70,24 +68,22 @@ while get_volume_status(volume_id) != "available":
     sleep(60)
   
   
-print("*****************create snapshot*******************")
+print("\n*****************create snapshot*******************")
   
 request = CreateSnapshotRequest()
 request.volume_id = volume_id
 response = jcs.create_snapshot(request)
 snapshot_id = response.snapshot.snapshot_id
-print(response.xml)
 print_request_response(request, response)
   
 while get_snapshot_status(snapshot_id) != "completed":
     sleep(60)
 
-print("*****************delete volume*******************")
+print("\n*****************delete volume*******************")
   
 request = DeleteVolumeRequest()
 request.volume_id = volume_id
 response = jcs.delete_volume(request)
-print(response.xml)
 print_request_response(request, response)
   
   
@@ -98,7 +94,6 @@ print("*****************delete snapshot*******************")
 request = DeleteSnapshotRequest()
 request.snapshot_id = snapshot_id
 response = jcs.delete_snapshot(request)
-print(response.xml)
 print_request_response(request, response)
 
 
