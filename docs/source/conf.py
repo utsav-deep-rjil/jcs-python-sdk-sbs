@@ -59,8 +59,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'JCS SBS Python SDK'
-copyright = u'2016, utsav.deep'
-author = u'utsav.deep'
+copyright = u'2016, Jio Cloud Services'
+author = u'Jio Cloud Services'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -270,7 +270,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'JCSSBSPythonSDK.tex', u'JCS SBS Python SDK Documentation',
-     u'utsav.deep', 'manual'),
+     u'Jio Cloud Services', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

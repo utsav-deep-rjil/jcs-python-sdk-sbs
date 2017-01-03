@@ -112,9 +112,12 @@ def get_config():
     Returns:
         An instance of ConfigParser object.
     """
+    
+    ROOT = os.path.dirname(__file__)
     config = ConfigParser.RawConfigParser()
-    if os.path.exists("../../fixtures/config.properties"):
-        config.read("../../fixtures/config.properties")
+    config_path = ROOT+"/../../fixtures/config.properties"
+    if os.path.exists(config_path):
+        config.read(config_path)
     else:
-        LOG.warn("%s/../../fixtures/config.properties not found", os.getcwd())
+        LOG.warn("%s not found",config_path)
     return config

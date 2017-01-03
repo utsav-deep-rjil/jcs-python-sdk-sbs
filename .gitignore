@@ -1,3 +1,5 @@
 fixtures/config.properties
 *.pyc
+build/
+dist/
 
