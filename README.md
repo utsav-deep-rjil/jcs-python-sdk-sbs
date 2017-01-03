@@ -16,7 +16,6 @@ Before using the SDK:
 CA-CERTIFICATE INSTALLATION:
 ----------------------------
 
-- 
 **Get the ca-certificate for JIO cloud services from JIO Cloud Team and install it**
 
 - For Linux : Place the ca-certificate inside the folder 
@@ -50,7 +49,7 @@ You can set these properties in any of the following locations:
 
 - OS Environment Variables
 - In 
-`config.properties` file under `fixtures` folder of this project. The content of this file must be like this:
+`config.properties` file under `fixtures` folder of this project. The content of this file should be like this:
 
 ```
 [dev]
