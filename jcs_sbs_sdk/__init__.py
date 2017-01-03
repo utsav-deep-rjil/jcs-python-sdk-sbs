@@ -14,9 +14,25 @@ from jcs_sbs_sdk.model.describe_volumes_request import DescribeVolumesRequest
 from jcs_sbs_sdk.service.jcs_compute_client import JCSComputeClient
 
 
-jcs = JCSComputeClient()
+
+def INFO():
+    """
+    This is the parent module of all the modules in this SDK.
+    The __init__ file of this module shows how to create/describe/delete the volumes and snapshots with basic examples.
+    Following utility methods are used in the example code only in this file.
+    """
+    pass
 
 def get_volume_status(volume_id):
+    """
+    Returns the status of the volume with given volume ID.
+    
+    Args:
+        volume_id (str): ID of the volume.
+    
+    Returns:
+        Volume's current status (str).
+    """
     describe_volume_request = DescribeVolumesRequest()
     describe_volume_request.volume_ids=[volume_id]
     response = jcs.describe_volumes(describe_volume_request)
@@ -24,6 +40,15 @@ def get_volume_status(volume_id):
     return response.volumes[0].status
 
 def get_snapshot_status(snapshot_id):
+    """
+    Returns the status of the snapshot with given snapshot ID.
+    
+    Args:
+        snapshot_id (str): ID of the snapshot.
+    
+    Returns:
+        Snapshot's current status (str).
+    """
     describe_snapshot_request = DescribeSnapshotsRequest()
     describe_snapshot_request.snapshot_ids=[snapshot_id]
     response = jcs.describe_snapshots(describe_snapshot_request)
@@ -31,18 +56,35 @@ def get_snapshot_status(snapshot_id):
     return response.snapshots[0].status
 
 def print_json(inp_str):
+    """
+    Prints the given JSON string after adding indentation to make it more readable.
+    
+    Args:
+        inp_str (str): The JSON string which is to be pretty printed.
+    """
     #print(inp_str)
     parsed = json.loads(str(inp_str))
     print json.dumps(parsed, indent=4)
 
 def print_request_response(request,response):
+    """
+    Pretty prints request and response objects in json format. Additionally it also prints the backend API's XML response.
+    It also labels them to make the output more readable. 
+    
+    Args:
+        request (instance of JCSRequest class): The request object used to call the SBS service method.
+        
+        response (instance of JCSResult class): The response object returned by the SBS service method.
+    """
     print("\nRequest object in JSON is:")
     print_json(request)
     print("\nAPI response XML is:")
     print(response.xml)
     print("\nSDK Response object in JSON is:")
     print_json(response)
-  
+
+jcs = JCSComputeClient()
+
 print("\n*****************describe volumes*******************")
   
 request = DescribeVolumesRequest()
