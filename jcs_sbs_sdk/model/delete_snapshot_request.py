@@ -2,6 +2,12 @@ from jcs_request import JCSRequest
 from ..common import utils
 
 class DeleteSnapshotRequest(JCSRequest):
+    """
+    Request class for delete snapshot operation.
+    
+    Attributes:
+        snapshot_id (str): ID of the snapshot to be deleted.
+    """
     def __init__(self):
         self._snapshot_id = None
         super(DeleteSnapshotRequest, self).__init__()
@@ -20,4 +26,7 @@ class DeleteSnapshotRequest(JCSRequest):
         del self._snapshot_id
 
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         return '{"snapshot_id":"%s"}' % (self.snapshot_id)

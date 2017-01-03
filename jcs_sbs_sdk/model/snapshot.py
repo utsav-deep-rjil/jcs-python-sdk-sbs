@@ -3,6 +3,22 @@ from datetime import datetime
 from ..common import utils
 
 class Snapshot:
+    """
+    Model class for a snapshot.
+    
+    Attributes:
+        volume_id (str): ID of volume from which snapshot is created.
+        
+        volume_size (positive int): Size of source volume.
+        
+        snapshot_id (str): ID of this snapshot.
+        
+        encrypted (bool): Indicates if the snapshot is encrypted or not.
+        
+        status (str): Current status of the snapshot. Possible values are: pending, completed and error.
+        
+        start_time (datetime): datetime value at which snapshot was created.
+    """
     def __init__(self):
         self._volume_id = None
         self._volume_size = None
@@ -90,6 +106,9 @@ class Snapshot:
         del self._start_time
         
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         to_string = '{"volume_id":"%s","volume_size":%s,"snapshot_id":"%s","encrypted":"%s","status":"%s","start_time":"%s"}'%\
      (self.volume_id, self.volume_size, self.snapshot_id, self.encrypted, self.status, str(self.start_time))
         to_string = to_string.replace('"None"', "null")

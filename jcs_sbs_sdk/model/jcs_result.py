@@ -1,6 +1,14 @@
 from ..common import utils
 
 class JCSResult(object):
+    """
+    Parent class for all the result classes. Contains common attributes present in any result class.
+    
+    Attributes:
+        request_id (str): Request ID returned by backend API.
+        
+        xml (str): Actual XML response returned by the backend API.
+    """
     def __init__(self):
         self._request_id = None
         self._xml = None

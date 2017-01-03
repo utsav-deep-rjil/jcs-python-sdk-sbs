@@ -13,7 +13,22 @@ from ..common import constants
 from ..common import utils
 
 class Authorization(object):
+    '''
+        Class containing methods responsible for adding authorization parameters in the API request.
+        The constructor of this class accepts the arguments given below.
+         
+        Args:
+            url (str): Request URL to which authorization parameters are to be added.
+            
+            request_method (str): Request method of the target API.
+            
+            credentials (Credentials): an instance of Credentials object containing access and secret keys.
+            
+            headers (dict): Common headers that are to be added to any API request.
+        '''
+        
     def __init__(self, url, request_method, credentials, headers):
+        
         self._verb = utils.validate_string(request_method, "request_method")
         self._credentials = utils.validate_generic(credentials, "credentials", Credentials)
         self._headers = utils.validate_generic(headers, "headers", type({}))
@@ -31,7 +46,19 @@ class Authorization(object):
             self._port = self._host[colon_idx + 1:]
             self._host = self._host[:colon_idx]
         
+        
     def add_params(self, query_params):
+        '''
+        Sets required common parameters, such as JCSAccessKeyId,
+        SignatureVersion, SignatureMethod and so on that is used
+        to create request URL.
+        
+        Args:
+            query_params (dict): Query parameters that are to be added to API request
+        
+        Raises:
+            TypeError: If query_param is not of type dict
+        '''
         utils.validate_generic(query_params, "query_params", type({}))
         query_params["JCSAccessKeyId"] = self._credentials.access_key
         query_params["SignatureVersion"] = "2"
@@ -47,7 +74,16 @@ class Authorization(object):
             os.environ['TZ'] = tmp
         
     def _get_utf8_value(self, value):
-        """Get the uTF8-encoded version of a value."""
+        """
+        Returns the UTF8-encoded version of a value.
+        
+        Args:
+            value (str): The string value to be converted to UTF8.
+                If the given value is not a string then the given value is first converted to str.
+                
+        Returns:
+            The UTF8-encoded version of a value.
+        """
         if not isinstance(value, (six.binary_type, six.text_type)):
             value = str(value)
         if isinstance(value, six.text_type):
@@ -56,6 +92,16 @@ class Authorization(object):
             return value
     
     def serialize_params(self, query_params):
+        '''
+        Creates URL encoded string such that keys are in sorted order.
+        
+        Args:
+            query_params (dict): Query parameters for the API request.
+        
+        Raises:
+            TypeError: If 'query_params' is not a dict.
+        '''
+        utils.validate_generic(query_params, "query_params", type({}))
         keys = list(query_params)
         keys.sort()
         query_strings = []
@@ -65,6 +111,18 @@ class Authorization(object):
         return "&".join(query_strings)
     
     def string_to_sign(self, query_params):
+        ''' 
+        Generates the request string that needs to be signed.
+         
+        Args:
+            query_params (dict): Query parameters for the API request.
+        
+        Returns:
+            Request String that needs to be signed.
+            
+        Raises:
+            TypeError: If 'query_params' is not a 'dict'.
+        '''
         utils.validate_generic(query_params, "query_params", type({}))
         signature_strings = [self._verb, "\n", self._host]
         if self._port != "":
@@ -75,16 +133,21 @@ class Authorization(object):
         return "".join(signature_strings)
     
     def add_auth(self, query_params):
+        '''
+        Adds signature to the 'query_params' dict.
+         
+        Args:
+            query_params (dict): Query parameters for the API request.
+            
+        Raises:
+            TypeError: If 'query_params' is not a 'dict'.
+        '''
         utils.validate_generic(query_params, "query_params", type({}))
         hmac_256 = hmac.new(self._credentials.secret_key, digestmod=hashlib.sha256)
         signature_string = self.string_to_sign(query_params)
         hmac_256.update(signature_string.encode('utf-8'))
         b64 = base64.b64encode(hmac_256.digest()).decode('utf-8')
         b64 = urllib.quote(b64)
-        b64 = string.replace(b64,"%2F","/")
+        b64 = string.replace(b64, "%2F", "/")
         query_params['Signature'] = b64
-        
-        
-        
-        
         

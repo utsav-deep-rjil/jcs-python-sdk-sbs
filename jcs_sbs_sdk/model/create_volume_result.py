@@ -3,6 +3,12 @@ from ..common import utils
 from jcs_result import JCSResult
 
 class CreateVolumeResult(JCSResult):
+    """
+    Response class for create volume operation.
+    
+    Attributes:
+        volume (Volume): An instance of volume class. Contains the details of the created volume.
+    """
     def __init__(self):
         self._volume = None
         super(CreateVolumeResult, self).__init__()
@@ -21,4 +27,7 @@ class CreateVolumeResult(JCSResult):
         del self._volume
     
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         return '{"volume":%s,"request_id":"%s"}' % (self.volume.__str__(), self.request_id)

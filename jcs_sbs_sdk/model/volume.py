@@ -3,6 +3,26 @@ from attachment import Attachment
 from datetime import datetime
 
 class Volume:
+    """
+    Model class for a volume.
+    
+    Attributes:
+        volume_id (str): ID of this volume.
+        
+        size (positive int): Size of this volume.
+        
+        volume_type (str): Type of this volume. Possible values are 'standard' or 'ms1'
+        
+        snapshot_id (str): ID of snapshot (if any) from which volume was created.
+        
+        encrypted (bool): Indicates if the volume is encrypted or not.
+        
+        status (str): Current status of the volume. Possible values are: creating and available.
+        
+        attachments (list of Attachment objects): List of devices to which this volume is attached.
+        
+        create_time (datetime): datetime value at which volume was created.
+    """
     def __init__(self):
         self._volume_id = None
         self._size = None
@@ -118,7 +138,9 @@ class Volume:
         del self._create_time
         
     def __str__(self):
-        
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         attachment_str = []
         for attachment in self.attachments:
             attachment_str.append(attachment.__str__())

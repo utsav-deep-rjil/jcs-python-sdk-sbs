@@ -3,6 +3,26 @@ from jcs_request import JCSRequest
 import json
 
 class DescribeSnapshotsRequest(JCSRequest):
+    """
+    Request class for describe snapshots operation.
+    
+    Attributes:
+        snapshot_ids (list of str): IDs of specific snapshot to be described.
+        
+        next_token (str): ID of last snapshot in the previous call of describe_snapshot method.
+            If the describeSnapshots() method was called with a MaxResults option,
+            all items would not have been returned. So, the previous call of
+            describeSnapshots() method returns 'nextToken' to get next set of items.
+            This is basically the Id of the last seen item from the previous call.
+            The describeSnapshots() will return the next set of items after this Id
+            and the new value of 'nextToken'
+            
+        max_results (int): Maximum number of snapshots to be described.
+            To get the next set of snapshots, ID of the last snapshot should be passed as 'next_token'
+            in next call of describe snapshot.
+        
+        detail (bool): If 'detail' is set to 'True', then the snapshots will be described in detail.
+    """
     def __init__(self):
         self._snapshot_ids = None
         self._next_token = None
@@ -63,6 +83,9 @@ class DescribeSnapshotsRequest(JCSRequest):
         del self._detail
         
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         to_string = '{"snapshot_ids": %s,"next_token":"%s","max_results":"%s","detail":"%s"}'\
              % (str(self.snapshot_ids), self.next_token, self.max_results, self.detail)
         to_string = to_string.replace('"None"', "null")

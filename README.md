@@ -4,6 +4,9 @@
 This is the python sdk for APIs provided by Jio Cloud Services - Simple Block Storage.
 To use it download or clone this project and then import it in your project.
 
+To generate documentation, go to docs folder of the project and run *make html* in the terminal.
+To view the documentation, go to *docs/build/html* folder and click on index.html.
+
 Some basic examples for using the SDK is given in this README itself.
 
 

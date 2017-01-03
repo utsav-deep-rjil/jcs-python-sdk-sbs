@@ -2,6 +2,12 @@ from jcs_request import JCSRequest
 from ..common import utils
 
 class DeleteVolumeRequest(JCSRequest):
+    """
+    Request class for delete volume operation.
+    
+    Attributes:
+        volume_id (str): ID of volume to be deleted.
+    """
     def __init__(self):
         self._volume_id = None
         super(DeleteVolumeRequest, self).__init__()
@@ -20,4 +26,7 @@ class DeleteVolumeRequest(JCSRequest):
         del self._volume_id
     
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         return '{"volume_id":"%s"}' % (self.volume_id)

@@ -24,12 +24,42 @@ from ..model.volume import Volume
 
 
 class JCSComputeClient(JCSHttpClient):
-    def __init__(self, credentials=Credentials(), base_url=None):
+    """
+    Contains methods that provide access to the operations supported by this SDK.
+    The supported operations are create, describe and delete on volume and snapshot.
+    
+    Attributes:
+        credentials (Credentials): Stores credentials (access and secret keys) 
+            required for sending any backend API request.
+            
+    The init method takes following arguments:
+    
+    Args:
+        credentials (Credentials, optional, default = None): Stores ACCESS_KEY and SECRET_KEY.
+        
+        base_url (str, optional, default = None): Base URL or endpoint for backend APIs.
+    """
+    def __init__(self, credentials=None, base_url=None):
+        if credentials is None:
+            credentials = Credentials()
         self._credentials = credentials
         super(JCSComputeClient, self).__init__(base_url)
         
         
     def describe_volumes(self, describe_volumes_request):
+        """
+        Returns a list of Volumes according to the filters set in the DescribeVolumesRequest object.
+        
+        Args:
+            describe_volumes_request (DescribeVolumesRequest): An object of DescribeVolumesRequest containing values required
+                in describe volumes API.
+                
+        Returns:
+            DescribeVolumesResult object containing list of Volumes as returned by the describe volume API.
+        
+        Raises:
+            TypeError: If 'describe_volumes_request' is not an instance of DescribeVolumesResult.
+        """
         utils.validate_generic(describe_volumes_request, "describe_volumes_request", DescribeVolumesRequest)
         query_params = {}
         query_params["Action"] = "DescribeVolumes"
@@ -85,6 +115,18 @@ class JCSComputeClient(JCSHttpClient):
 
     
     def create_volume(self, create_volume_request):
+        """
+        Creates a volume with specifications given in the CreateVolumeRequest object.
+        
+        Args:
+            create_volume_request (CreateVolumeRequest): An object of CreateVolumeRequest containing values required in create volume API.
+            
+        Returns:
+            CreateVolumeResult object containing values in response given by the create volume API.
+        
+        Raises:
+            TypeError: If 'create_volume_request' is not an instance of 'CreateVolumeRequest'.
+        """
         utils.validate_generic(create_volume_request, "create_volume_request", CreateVolumeRequest)
         query_params = {}
         query_params["Action"] = "CreateVolume"
@@ -131,6 +173,18 @@ class JCSComputeClient(JCSHttpClient):
 
     
     def delete_volume(self, delete_volume_request):
+        """
+        Deletes the volume with volume_id given in the DeleteVolumeRequest object.
+        
+        Args:
+            delete_volume_request (DeleteVolumeRequest): An object of DeleteVolumeRequest containing values required in create volume API.
+            
+        Returns:
+            DeleteVolumeResult object containing values in response given by the delete volume API.
+        
+        Raises:
+            TypeError: If 'delete_volume_request' is not an instance of 'DeleteVolumeRequest'.
+        """
         utils.validate_generic(delete_volume_request, "delete_volume_request", DeleteVolumeRequest)
         query_params = {}
         query_params["Action"] = "DeleteVolume"
@@ -154,6 +208,19 @@ class JCSComputeClient(JCSHttpClient):
         
         
     def describe_snapshots(self, describe_snapshots_request):
+        """
+        Returns a list of Snapshots according to the filters set in the DescribeSnapshotsRequest object.
+        
+        Args:
+            describe_snapshots_request (DescribeSnapshotsRequest): An object of DescribeSnapshotsRequest containing values required
+                in describe snapshots API.
+                
+        Returns:
+            DescribeSnapshotsResult object containing list of Snapshots as returned by the describe snapshot API.
+        
+        Raises:
+            TypeError: If 'describe_snapshots_request' is not an instance of DescribeSnapshotsResult.
+        """
         utils.validate_generic(describe_snapshots_request, "describe_snapshots_request", DescribeSnapshotsRequest)
         query_params = {}
         query_params["Action"] = "DescribeSnapshots"
@@ -197,6 +264,18 @@ class JCSComputeClient(JCSHttpClient):
             response.close()
 
     def delete_snapshot(self, delete_snapshot_request):
+        """
+        Deletes the snapshot with snapshot_id given in the DeleteSnapshotRequest object.
+        
+        Args:
+            delete_snapshot_request (DeleteSnapshotRequest): An object of DeleteSnapshotRequest containing values required in create snapshot API.
+            
+        Returns:
+            DeleteSnapshotResult object containing values in response given by the delete snapshot API.
+        
+        Raises:
+            TypeError: If 'delete_snapshot_request' is not an instance of 'DeleteSnapshotRequest'.
+        """
         utils.validate_generic(delete_snapshot_request, "delete_snapshot_request", DeleteSnapshotRequest)
         query_params = {}
         query_params["Action"] = "DeleteSnapshot"
@@ -220,6 +299,18 @@ class JCSComputeClient(JCSHttpClient):
         
 
     def create_snapshot(self, create_snapshot_request):
+        """
+        Creates a snapshot with specifications given in the CreateSnapshotRequest object.
+        
+        Args:
+            create_snapshot_request (CreateSnapshotRequest): An object of CreateSnapshotRequest containing values required in create snapshot API.
+            
+        Returns:
+            CreateSnapshotResult object containing values in response given by the create snapshot API.
+        
+        Raises:
+            TypeError: If 'create_snapshot_request' is not an instance of 'CreateSnapshotRequest'.
+        """
         utils.validate_generic(create_snapshot_request, "create_snapshot_request", CreateSnapshotRequest)
         query_params = {}
         query_params["Action"] = "CreateSnapshot"

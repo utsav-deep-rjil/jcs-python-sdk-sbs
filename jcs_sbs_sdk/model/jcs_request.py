@@ -2,6 +2,16 @@ from ..auth.credentials import Credentials
 from ..common import utils
     
 class JCSRequest(object):
+    """
+    Parent class for all the request classes. Contains the common attributes for all the requests.
+    
+    Attributes:
+        credentials (Credentials): An instance of Credentials object containing access and secret keys,
+            which is required for sending any request.
+        
+        custom_request_headers (dict): Stores some custom headers,
+            required for sending any request to the backend API, in a dictionary.
+    """
     def __init__(self):
         self._credentials = None
         self._custom_request_headers = {}

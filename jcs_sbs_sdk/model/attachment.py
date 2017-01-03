@@ -1,7 +1,14 @@
 from ..common import utils
 
 class Attachment(object):
+    """
+    Model class for storing information of the devices to which volume is attached.
     
+    Attributes:
+        instance_id (str): ID of instance to which the volume is attached.
+        
+        device (str): Device to which the volume is attached.
+    """
     def __init__(self):
         self._instance_id = None
         self._device = None
@@ -16,7 +23,7 @@ class Attachment(object):
         self._instance_id = utils.validate_string(value, "instance_id")
 
     @instance_id.deleter
-    def volumes(self):
+    def instance_id(self):
         del self._instance_id
         
     @property
@@ -33,6 +40,9 @@ class Attachment(object):
         del self._device
         
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         return '{"instance_id":"%s","device":"%s"}' % (self.instance_id, self.device)    
     
         

@@ -3,6 +3,12 @@ from ..common import utils
 from jcs_result import JCSResult
 
 class DescribeVolumesResult(JCSResult):
+    """
+    Response class for describe volumes operation.
+    
+    Attributes:
+        volumes (list of Volume objects): List containing volume objects containing results of the describe volume operation.
+    """
     def __init__(self):
         self._volumes = None
         super(DescribeVolumesResult, self).__init__()
@@ -21,6 +27,9 @@ class DescribeVolumesResult(JCSResult):
         del self._volumes
     
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         volumes_str = []
         for volume in self.volumes:
             volumes_str.append(volume.__str__())

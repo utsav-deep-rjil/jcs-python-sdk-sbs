@@ -1,23 +1,36 @@
 import os
 from ..common import utils
 from ..common import log
-from ..common.config_reader import ConfigReader
 
 
 LOG = log.get_global_logger()
 
 class Credentials(object):
+    """
+    Class that contains the credentials required for sending the backend API request.
+    The constructor of this class accepts following arguments.
     
+    Args:
+        access_key (str, optional, default = None): The JCS Access Key.
+        
+        secret_key (str, optional, default = None): The JCS Secret Key.
+        
+    
+    Attributes:
+        access_key (str): The JCS Access Key.
+        
+        secret_key (str): The JCS Secret Key.
+    """
     def __init__(self,access_key=None,secret_key=None):
         self._access_key = access_key
         self._secret_key = secret_key
-        self._config = ConfigReader().config
+        self._config = utils.get_config()
         if self._config != None:
             self._env = self._config.get('branch','env')
 
     @property
     def access_key(self):
-        """JCS ACCESS KEY"""
+        """The JCS ACCESS KEY"""
         if self._access_key == None:
             if "ACCESS_KEY" in os.environ:
                 LOG.info("Using ACCESS_KEY from os environment variables")
@@ -40,7 +53,7 @@ class Credentials(object):
         
     @property
     def secret_key(self):
-        """JCS SECRET KEY"""
+        """The JCS SECRET KEY"""
         if self._secret_key == None:
             if "SECRET_KEY" in os.environ:
                 LOG.info("Using SECRET_KEY from os environment variables")

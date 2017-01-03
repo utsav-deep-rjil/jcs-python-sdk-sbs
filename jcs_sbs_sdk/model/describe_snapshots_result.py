@@ -3,6 +3,12 @@ from ..common import utils
 from jcs_result import JCSResult
 
 class DescribeSnapshotsResult(JCSResult):
+    """
+    Response class for describe snapshots operation.
+    
+    Attributes:
+        snapshots (list of Snapshot objects): List containing snapshot objects containing results of the describe snapshot operation.
+    """
     def __init__(self):
         self._snapshots = None
         super(DescribeSnapshotsResult, self).__init__()
@@ -21,6 +27,9 @@ class DescribeSnapshotsResult(JCSResult):
         del self._snapshots
     
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         snapshots_str = []
         for snapshot in self.snapshots:
             snapshots_str.append(snapshot.__str__())

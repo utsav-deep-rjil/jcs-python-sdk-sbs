@@ -2,6 +2,15 @@ from ..common import utils
 from jcs_request import JCSRequest
 
 class CreateVolumeRequest(JCSRequest):
+    """
+    Request class for create volume operation.
+    
+    Attributes:
+        size (int): Size of the volume.
+        snapshot_id (str): ID of snapshot from which the volume is to be created.
+        volume_type (str): Type of the volume to be created. The types can be 'standard' or 'ms1' 
+        encrypted (bool): Indicates if created volume will be encrypted or not.
+    """
     def __init__(self):
         self._size = None
         self._snapshot_id = None
@@ -24,7 +33,7 @@ class CreateVolumeRequest(JCSRequest):
         
     @property
     def snapshot_id(self):
-        """ID of snapshot from which the volume was created. """
+        """ID of snapshot from which the volume is to be created."""
         return self._snapshot_id
 
     @snapshot_id.setter
@@ -37,7 +46,7 @@ class CreateVolumeRequest(JCSRequest):
     
     @property
     def volume_type(self):
-        """Type of the volume (string). The types can be 'standard' or 'ms1' """
+        """Type of the volume (str). The types can be 'standard' or 'ms1' """
         return self._volume_type
 
     @volume_type.setter
@@ -62,6 +71,9 @@ class CreateVolumeRequest(JCSRequest):
         del self._encrypted
         
     def __str__(self):
+        """
+        Returns JSON string representation of this class used for debugging.
+        """
         to_string = '{"size":%d,"volume_type":"%s","snapshot_id":"%s","encrypted":"%s"}'%\
         (self.size, self.volume_type, self.snapshot_id, self.encrypted)
         to_string = to_string.replace('"None"', "null")
