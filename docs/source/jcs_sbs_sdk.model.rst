@@ -1,8 +1,10 @@
 jcs_sbs_sdk.model package
 =========================
 
-Submodules
-----------
+.. automodule:: jcs_sbs_sdk.model
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 jcs_sbs_sdk.model.attachment module
 -----------------------------------
@@ -140,11 +142,3 @@ jcs_sbs_sdk.model.volume module
     :undoc-members:
     :show-inheritance:
 
-
-Module contents
----------------
-
-.. automodule:: jcs_sbs_sdk.model
-    :members:
-    :undoc-members:
-    :show-inheritance:

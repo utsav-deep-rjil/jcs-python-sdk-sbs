@@ -2,12 +2,12 @@ from ..common import utils
 
 class Attachment(object):
     """
-    Model class for storing information of the devices to which volume is attached.
+    Model class for storing information of the devices to which the volume is attached.
     
     Attributes:
-        instance_id (str): ID of instance to which the volume is attached.
+        instance_id (:obj:`str`): ID of the instance to which the volume is attached.
         
-        device (str): Device to which the volume is attached.
+        device (:obj:`str`): Device to which the volume is attached.
     """
     def __init__(self):
         self._instance_id = None
@@ -15,7 +15,7 @@ class Attachment(object):
 
     @property
     def instance_id(self):
-        """ID of instance to which the volume is attached"""
+        """(:obj:`str`) ID of the instance to which the volume is attached"""
         return self._instance_id
 
     @instance_id.setter
@@ -28,7 +28,7 @@ class Attachment(object):
         
     @property
     def device(self):
-        """Device to which the volume is attached"""
+        """(:obj:`str`) Device to which the volume is attached"""
         return self._device
 
     @device.setter

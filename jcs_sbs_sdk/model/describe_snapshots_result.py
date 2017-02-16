@@ -4,10 +4,10 @@ from jcs_result import JCSResult
 
 class DescribeSnapshotsResult(JCSResult):
     """
-    Response class for describe snapshots operation.
+    Response class for the describe snapshots operation.
     
     Attributes:
-        snapshots (list of Snapshot objects): List containing snapshot objects containing results of the describe snapshot operation.
+        snapshots (:obj:`list` of :class:`jcs_sbs_sdk.model.snapshot.Snapshot`): List of Snapshot objects that contain results of the describe snapshots operation.
     """
     def __init__(self):
         self._snapshots = None
@@ -15,7 +15,7 @@ class DescribeSnapshotsResult(JCSResult):
 
     @property
     def snapshots(self):
-        """List of snapshot objects"""
+        """(:obj:`list` of :class:`jcs_sbs_sdk.model.snapshot.Snapshot`) List of snapshot objects."""
         return self._snapshots
 
     @snapshots.setter

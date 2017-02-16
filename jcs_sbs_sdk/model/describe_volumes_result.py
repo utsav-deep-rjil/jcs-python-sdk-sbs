@@ -7,7 +7,7 @@ class DescribeVolumesResult(JCSResult):
     Response class for describe volumes operation.
     
     Attributes:
-        volumes (list of Volume objects): List containing volume objects containing results of the describe volume operation.
+        volumes (:obj:`list` of :class:`jcs_sbs_sdk.model.volume.Volume`): List of Volume objects that contain results of the describe snapshots operation.
     """
     def __init__(self):
         self._volumes = None
@@ -15,7 +15,7 @@ class DescribeVolumesResult(JCSResult):
 
     @property
     def volumes(self):
-        """List of volume objects"""
+        """(:obj:`list` of :class:`jcs_sbs_sdk.model.volume.Volume`) List of volume objects"""
         return self._volumes
 
     @volumes.setter

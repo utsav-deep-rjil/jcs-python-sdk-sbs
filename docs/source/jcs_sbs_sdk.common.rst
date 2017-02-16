@@ -1,8 +1,10 @@
 jcs_sbs_sdk.common package
 ==========================
 
-Submodules
-----------
+.. automodule:: jcs_sbs_sdk.common
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 jcs_sbs_sdk.common.constants module
 -----------------------------------
@@ -37,10 +39,4 @@ jcs_sbs_sdk.common.utils module
     :show-inheritance:
 
 
-Module contents
----------------
 
-.. automodule:: jcs_sbs_sdk.common
-    :members:
-    :undoc-members:
-    :show-inheritance:

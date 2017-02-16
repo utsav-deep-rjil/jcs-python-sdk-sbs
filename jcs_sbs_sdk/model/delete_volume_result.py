@@ -6,7 +6,7 @@ class DeleteVolumeResult(JCSResult):
     Response class for delete volume operation.
     
     Attributes:
-        deleted (boolean): Indicates if the volume with given volume_id is deleted or not.
+        deleted (:obj:`bool`): Indicates if the volume with given volume_id is deleted or not.
     """
     def __init__(self):
         self._deleted = None
@@ -14,7 +14,7 @@ class DeleteVolumeResult(JCSResult):
 
     @property
     def deleted(self):
-        """Boolean value indicating if volume is deleted or not."""
+        """(:obj:`bool`) Boolean value indicating if the volume is deleted or not."""
         return self._deleted
 
     @deleted.setter

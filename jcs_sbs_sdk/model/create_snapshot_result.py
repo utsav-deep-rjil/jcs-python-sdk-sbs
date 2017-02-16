@@ -7,7 +7,7 @@ class CreateSnapshotResult(JCSResult):
     Response class for create snapshot operation.
     
     Attributes:
-        snapshot (Snapshot): Object of class Snapshot, containing details of snapshot that is created.
+        snapshot (:class:`jcs_sbs_sdk.model.snapshot.Snapshot`): Object of the class Snapshot that contains details of the created snapshot.
     """
     def __init__(self):
         self._snapshot = None
@@ -15,7 +15,7 @@ class CreateSnapshotResult(JCSResult):
 
     @property
     def snapshot(self):
-        """Object of snapshot that is created"""
+        """(:class:`jcs_sbs_sdk.model.Snapshot`) Object of the created snapshot."""
         return self._snapshot
 
     @snapshot.setter

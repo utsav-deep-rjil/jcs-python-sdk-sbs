@@ -36,7 +36,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
+    'sphinx.ext.viewcode',        
     'sphinx.ext.githubpages',
 ]
 
@@ -59,7 +59,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'JCS SBS Python SDK'
-copyright = u'2016, Jio Cloud Services'
+copyright = u'2017, Jio Cloud Services'
 author = u'Jio Cloud Services'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -104,7 +104,7 @@ exclude_patterns = []
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
 #
-# add_module_names = True
+add_module_names = False
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.

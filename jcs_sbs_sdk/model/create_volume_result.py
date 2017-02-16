@@ -4,10 +4,10 @@ from jcs_result import JCSResult
 
 class CreateVolumeResult(JCSResult):
     """
-    Response class for create volume operation.
+    Response class for the create volume operation.
     
     Attributes:
-        volume (Volume): An instance of volume class. Contains the details of the created volume.
+        volume (:class:`jcs_sbs_sdk.model.volume.Volume`): An object of the Volume class. Contains the details of the created volume.
     """
     def __init__(self):
         self._volume = None
@@ -15,7 +15,7 @@ class CreateVolumeResult(JCSResult):
 
     @property
     def volume(self):
-        """Object of volume that is created"""
+        """Object of the :class:`jcs_sbs_sdk.model.volume.Volume` that is created."""
         return self._volume
 
     @volume.setter

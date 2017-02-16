@@ -7,21 +7,21 @@ class Volume:
     Model class for a volume.
     
     Attributes:
-        volume_id (str): ID of this volume.
+        volume_id (:obj:`str`): ID of the volume.
         
-        size (positive int): Size of this volume.
+        size (positive :obj:`int`): Size of the volume.
         
-        volume_type (str): Type of this volume. Possible values are 'standard' or 'ms1'
+        volume_type (:obj:`str`): Type of the volume. Possible values are 'standard' or 'ms1'
         
-        snapshot_id (str): ID of snapshot (if any) from which volume was created.
+        snapshot_id (:obj:`str`): ID of snapshot (if any) from which the volume is created.
         
-        encrypted (bool): Indicates if the volume is encrypted or not.
+        encrypted (:obj:`bool`): Indicates if the volume is encrypted or not.
         
-        status (str): Current status of the volume. Possible values are: creating and available.
+        status (:obj:`str`): Current status of the volume. Possible values are: 'creating', 'available', 'in-use' and 'error'.
         
-        attachments (list of Attachment objects): List of devices to which this volume is attached.
+        attachments (:obj:`list` of :obj:`jcs_sbs_sdk.model.attachment.Attachment`): List of the devices to which this volume is attached.
         
-        create_time (datetime): datetime value at which volume was created.
+        create_time (:obj:`datetime`): The *datetime* value at which the volume is created.
     """
     def __init__(self):
         self._volume_id = None
@@ -35,7 +35,7 @@ class Volume:
 
     @property
     def volume_id(self):
-        """ID of the JCS Volume (string)"""
+        """(:obj:`str`) ID of the volume"""
         return self._volume_id
 
     @volume_id.setter
@@ -48,7 +48,7 @@ class Volume:
         
     @property
     def size(self):
-        """Size of the volume (int)"""
+        """(positive :obj:`int`) Size of the volume"""
         return self._size
 
     @size.setter
@@ -61,7 +61,7 @@ class Volume:
     
     @property
     def volume_type(self):
-        """Type of the volume (string). The types can be 'standard' or 'ms1' """
+        """(:obj:`str`) Type of the volume. The types can be 'standard' or 'ms1'."""
         return self._volume_type
 
     @volume_type.setter
@@ -74,7 +74,7 @@ class Volume:
     
     @property
     def snapshot_id(self):
-        """ID of snapshot from which the volume was created. """
+        """(:obj:`str`) ID of snapshot (if any) from which the volume is created. """
         return self._snapshot_id
 
     @snapshot_id.setter
@@ -87,7 +87,7 @@ class Volume:
     
     @property
     def encrypted(self):
-        """Boolean value indicating if volume is encrypted or not."""
+        """(:obj:`bool`) Indicates if the volume is encrypted or not."""
         return self._encrypted
 
     @encrypted.setter
@@ -100,7 +100,7 @@ class Volume:
     
     @property
     def status(self):
-        """Current status of the volume (string)."""
+        """(:obj:`str`) Current status of the volume. Possible values are: 'creating', 'available', 'in-use' and 'error'."""
         return self._status
 
     @status.setter
@@ -113,7 +113,7 @@ class Volume:
         
     @property
     def attachments(self):
-        """List of Attachment objects. Attachment Set contains the ID of device and instance to which the volume is attached"""
+        """(:obj:`list` of :obj:`jcs_sbs_sdk.model.attachment.Attachment`) List of the devices to which this volume is attached.."""
         return self._attachments
 
     @attachments.setter
@@ -126,7 +126,7 @@ class Volume:
         
     @property
     def create_time(self):
-        """Time at which volume is created."""
+        """(:obj:`datetime`) Time at which the volume is created."""
         return self._create_time
 
     @create_time.setter

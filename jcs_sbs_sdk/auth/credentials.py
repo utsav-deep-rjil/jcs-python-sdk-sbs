@@ -8,18 +8,18 @@ LOG = log.get_global_logger()
 class Credentials(object):
     """
     Class that contains the credentials required for sending the backend API request.
-    The constructor of this class accepts following arguments.
+    The constructor of this class accepts the following arguments.
     
     Args:
-        access_key (str, optional, default = None): The JCS Access Key.
+        access_key (:obj:`str`, optional, default = None): The JCS Access Key.
         
-        secret_key (str, optional, default = None): The JCS Secret Key.
+        secret_key (:obj:`str`, optional, default = None): The JCS Secret Key.
         
     
     Attributes:
-        access_key (str): The JCS Access Key.
+        access_key (:obj:`str`): The JCS Access Key.
         
-        secret_key (str): The JCS Secret Key.
+        secret_key (:obj:`str`): The JCS Secret Key.
     """
     def __init__(self,access_key=None,secret_key=None):
         self._access_key = access_key
@@ -30,7 +30,7 @@ class Credentials(object):
 
     @property
     def access_key(self):
-        """The JCS ACCESS KEY"""
+        """(:obj:`str`) The JCS Access Key"""
         if self._access_key == None:
             if "ACCESS_KEY" in os.environ:
                 LOG.info("Using ACCESS_KEY from os environment variables")
@@ -53,7 +53,7 @@ class Credentials(object):
         
     @property
     def secret_key(self):
-        """The JCS SECRET KEY"""
+        """(:obj:`str`) The JCS Secret Key"""
         if self._secret_key == None:
             if "SECRET_KEY" in os.environ:
                 LOG.info("Using SECRET_KEY from os environment variables")

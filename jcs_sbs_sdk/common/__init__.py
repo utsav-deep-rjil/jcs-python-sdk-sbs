@@ -1,3 +1,3 @@
 """
-Contains common classes to make API calls and other related utility methods for internal use.
+Contains common classes to make calls to internal APIs and other related utility methods for internal use.
 """

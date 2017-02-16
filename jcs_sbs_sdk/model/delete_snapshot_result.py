@@ -3,10 +3,10 @@ from ..common import utils
 
 class DeleteSnapshotResult(JCSResult):
     """
-    Response class for delete snapshot operation.
+    Response class for the delete snapshot operation.
     
     Attributes:
-        deleted (bool): Indicates if the snapshot with given snapshot_id is deleted or not.
+        deleted (:obj:`bool`): Indicates if the snapshot with given snapshot_id is deleted or not.
     """
     def __init__(self):
         self._deleted = None
@@ -14,7 +14,7 @@ class DeleteSnapshotResult(JCSResult):
 
     @property
     def deleted(self):
-        """Boolean value indicating if snapshot is deleted or not."""
+        """(:obj:`bool`) Boolean value indicating if the snapshot is deleted or not."""
         return self._deleted
 
     @deleted.setter

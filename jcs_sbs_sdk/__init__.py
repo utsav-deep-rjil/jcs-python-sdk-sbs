@@ -33,9 +33,7 @@ def get_volume_status(volume_id):
     Returns:
         Volume's current status (str).
     """
-    describe_volume_request = DescribeVolumesRequest()
-    describe_volume_request.volume_ids=[volume_id]
-    response = jcs.describe_volumes(describe_volume_request)
+    response = jcs.describe_volumes(volume_ids=[volume_id])
     print("Volume status: " + response.volumes[0].status)
     return response.volumes[0].status
 
@@ -49,9 +47,7 @@ def get_snapshot_status(snapshot_id):
     Returns:
         Snapshot's current status (str).
     """
-    describe_snapshot_request = DescribeSnapshotsRequest()
-    describe_snapshot_request.snapshot_ids=[snapshot_id]
-    response = jcs.describe_snapshots(describe_snapshot_request)
+    response = jcs.describe_snapshots(snapshot_ids=[snapshot_id])
     print("Snapshot status: " + response.snapshots[0].status)
     return response.snapshots[0].status
 
@@ -63,6 +59,8 @@ def print_json(inp_str):
         inp_str (str): The JSON string which is to be pretty printed.
     """
     #print(inp_str)
+    if(inp_str is None):
+        return
     parsed = json.loads(str(inp_str))
     print json.dumps(parsed, indent=4)
 
@@ -84,61 +82,60 @@ def print_request_response(request,response):
     print_json(response)
 
 jcs = JCSComputeClient()
-
+ 
 print("\n*****************describe volumes*******************")
-  
-request = DescribeVolumesRequest()
-response = jcs.describe_volumes(request)
-print_request_response(request, response)
-
+   
+response = jcs.describe_volumes()
+print_request_response(None, response)
+ 
 print("\n*****************create volume*******************")
-  
+   
 request = CreateVolumeRequest()
 request.size = 10
-response = jcs.create_volume(request)
+response = jcs.create_volume(size=10)
 volume_id = response.volume.volume_id
 print_request_response(request, response)
-
-
+ 
+ 
 print("\n*****************describe snapshots*******************")
-
+ 
 request = DescribeSnapshotsRequest()
 request.detail = True
-response = jcs.describe_snapshots(request)
+response = jcs.describe_snapshots(detail=True)
 print_request_response(request, response)
-
-   
+ 
+    
 while get_volume_status(volume_id) != "available":
     sleep(60)
-   
-   
+    
+    
 print("\n*****************create snapshot*******************")
-   
+    
 request = CreateSnapshotRequest()
 request.volume_id = volume_id
-response = jcs.create_snapshot(request)
+response = jcs.create_snapshot(volume_id=volume_id)
 snapshot_id = response.snapshot.snapshot_id
 print_request_response(request, response)
-
-
+ 
+ 
 snapshot_status = get_snapshot_status(snapshot_id)
 while snapshot_status != "completed" and snapshot_status != "error":
     sleep(60)
     snapshot_status = get_snapshot_status(snapshot_id)
- 
+  
 print("\n*****************delete volume*******************")
-
+ 
 request = DeleteVolumeRequest()
 request.volume_id = volume_id
-response = jcs.delete_volume(request)
+response = jcs.delete_volume(volume_id=volume_id)
 print_request_response(request, response)
-   
-   
-   
-   
+    
+    
+    
+    
 print("*****************delete snapshot*******************")
-   
+    
 request = DeleteSnapshotRequest()
 request.snapshot_id = snapshot_id
-response = jcs.delete_snapshot(request)
+response = jcs.delete_snapshot(snapshot_id=snapshot_id)
 print_request_response(request, response)

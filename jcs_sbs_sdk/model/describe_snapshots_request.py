@@ -1,27 +1,21 @@
 from ..common import utils
 from jcs_request import JCSRequest
-import json
 
 class DescribeSnapshotsRequest(JCSRequest):
     """
-    Request class for describe snapshots operation.
+    Request class for the describe snapshots operation.
     
     Attributes:
-        snapshot_ids (list of str): IDs of specific snapshot to be described.
+        snapshot_ids (:obj:`list` of :obj:`str`): IDs of specific snapshots to describe.
         
-        next_token (str): ID of last snapshot in the previous call of describe_snapshot method.
-            If the describeSnapshots() method was called with a MaxResults option,
-            all items would not have been returned. So, the previous call of
-            describeSnapshots() method returns 'nextToken' to get next set of items.
-            This is basically the Id of the last seen item from the previous call.
-            The describeSnapshots() will return the next set of items after this Id
-            and the new value of 'nextToken'
+        next_token (:obj:`str`): ID of the last snapshot in the previous call of the describe_snapshots() method.
+            Previously, if the describe_snapshots() method is called with 'max_results' option, all items are not returned.
+            To get the next set of snapshots, pass the ID of the last snapshot as 'next_token' in the subsequent call to the describe_snapshots() method.
             
-        max_results (int): Maximum number of snapshots to be described.
-            To get the next set of snapshots, ID of the last snapshot should be passed as 'next_token'
-            in next call of describe snapshot.
-        
-        detail (bool): If 'detail' is set to 'True', then the snapshots will be described in detail.
+        max_results (:obj:`int`): Maximum number of snapshots to describe.
+            To get the next set of snapshots, pass the ID of the last snapshot as 'next_token' in the subsequent call to the describe_snapshots() method.
+            
+        detail (:obj:`bool`): Set *True* to describe the snapshots in detail.
     """
     def __init__(self):
         self._snapshot_ids = None
@@ -32,7 +26,7 @@ class DescribeSnapshotsRequest(JCSRequest):
 
     @property
     def snapshot_ids(self):
-        """List of snapshot IDs (string)."""
+        """(:obj:`list` of :obj:`str`) List of the snapshot IDs."""
         return self._snapshot_ids
 
     @snapshot_ids.setter
@@ -45,7 +39,7 @@ class DescribeSnapshotsRequest(JCSRequest):
         
     @property
     def next_token(self):
-        """Last snapshot Id (string) returned by previous call of describe_snapshot method. """
+        """(:obj:`str`) ID of the last snapshot that is returned by the previous call of the describe_snapshot() method."""
         return self._next_token
 
     @next_token.setter
@@ -58,7 +52,7 @@ class DescribeSnapshotsRequest(JCSRequest):
     
     @property
     def max_results(self):
-        """Maximum number of snapshots to be described"""
+        """(:obj:`int`) Maximum number of snapshots to describe."""
         return self._max_results
 
     @max_results.setter
@@ -71,7 +65,7 @@ class DescribeSnapshotsRequest(JCSRequest):
     
     @property
     def detail(self):
-        """Boolean value indicating if details will be shown in response or not."""
+        """(:obj:`bool`) Set *True* to describe the snapshots in detail."""
         return self._detail
 
     @detail.setter

@@ -29,15 +29,15 @@ class JCSComputeClient(JCSHttpClient):
     The supported operations are create, describe and delete on volume and snapshot.
     
     Attributes:
-        credentials (Credentials): Stores credentials (access and secret keys) 
+        credentials (:class:`jcs_sbs_sdk.auth.credentials.Credentials`): Stores credentials (access and secret keys) 
             required for sending any backend API request.
             
     The init method takes following arguments:
     
     Args:
-        credentials (Credentials, optional, default = None): Stores ACCESS_KEY and SECRET_KEY.
+        credentials (:class:`jcs_sbs_sdk.auth.credentials.Credentials`, optional, default = None): Stores ACCESS_KEY and SECRET_KEY.
         
-        base_url (str, optional, default = None): Base URL or endpoint for backend APIs.
+        base_url (:obj:`str`, optional, default = None): Base URL or endpoint for backend APIs.
     """
     def __init__(self, credentials=None, base_url=None):
         if credentials is None:
@@ -46,21 +46,50 @@ class JCSComputeClient(JCSHttpClient):
         super(JCSComputeClient, self).__init__(base_url)
         
         
-    def describe_volumes(self, describe_volumes_request):
+    def describe_volumes(self, volume_ids=None, next_token=None, max_results=None, detail=None):
         """
-        Returns a list of Volumes according to the filters set in the DescribeVolumesRequest object.
+        Returns an object of the :class:`jcs_sbs_sdk.model.describe_volumes_result.DescribeVolumesResult` containing the 
+        :obj:`list` of :class:`jcs_sbs_sdk.model.volume.Volume` according to the corresponding internal API response.
         
         Args:
-            describe_volumes_request (DescribeVolumesRequest): An object of DescribeVolumesRequest containing values required
-                in describe volumes API.
+            volume_ids (:obj:`list` of :obj:`str`, optional, default = None): IDs of specific volume to be described.
+            
+            next_token (:obj:`str`, optional, default = None): ID of last volume in the previous call of the describe_volumes() method.
+                Previously, if the describe_volumes() method is called with 'max_results' option, all items are not returned.
+                To get the next set of volumes, pass the ID of the last volume as 'next_token' in the subsequent call to the describe_volumes() method.
                 
+            max_results (:obj:`int`, optional, default = None): Maximum number of volumes to describe.
+                To get the next set of volumes, pass the ID of the last volume as 'next_token' in the subsequent call to the describe_volumes() method.
+            
+            detail (:obj:`bool`, optional, default = None): Set *True* to describe the snapshots in detail.
+        
         Returns:
-            DescribeVolumesResult object containing list of Volumes as returned by the describe volume API.
+            An object of the :class:`jcs_sbs_sdk.model.describe_volumes_result.DescribeVolumesResult` containing the 
+            :obj:`list` of :class:`jcs_sbs_sdk.model.volume.Volume` according to the corresponding internal API response.
         
         Raises:
-            TypeError: If 'describe_volumes_request' is not an instance of DescribeVolumesResult.
+            TypeError: If:
+                * *volume_ids* is not a :obj:`list` of :obj:`str`
+                * *next_token* is not of type :obj:`str`
+                * *max_results* is not of type :obj:`int`
+                * *detail* is not of type :obj:`bool`
         """
-        utils.validate_generic(describe_volumes_request, "describe_volumes_request", DescribeVolumesRequest)
+        
+            
+        describe_volumes_request = DescribeVolumesRequest()
+        
+        if volume_ids is not None:
+            describe_volumes_request.volume_ids = volume_ids
+            
+        if next_token is not None:
+            describe_volumes_request.next_token = next_token
+            
+        if max_results is not None:
+            describe_volumes_request.max_results = max_results
+            
+        if detail is not None:
+            describe_volumes_request.detail = detail
+            
         query_params = {}
         query_params["Action"] = "DescribeVolumes"
         if describe_volumes_request.max_results != None:
@@ -114,20 +143,45 @@ class JCSComputeClient(JCSHttpClient):
             response.close()
 
     
-    def create_volume(self, create_volume_request):
+    def create_volume(self, size=None, snapshot_id=None, volume_type=None, encrypted=None):
         """
-        Creates a volume with specifications given in the CreateVolumeRequest object.
+        Creates a volume according to the arguments passed to this method and returns an object of :class:`jcs_sbs_sdk.model.create_volume_result.CreateVolumeResult`.
         
         Args:
-            create_volume_request (CreateVolumeRequest): An object of CreateVolumeRequest containing values required in create volume API.
+            size (:obj:`int`, optional if *snapshot_id* is given, default = None): Size of the volume.
+            
+            snapshot_id (:obj:`str`, optional if *size* is given, default = None): ID of snapshot from which the volume gets created.
+            
+            volume_type (:obj:`str`, optional, default = None): Type of the volume, 'standard' or 'ms1', to create. 
+            
+            encrypted (:obj:`bool`, optional, default = None): Indicates if the volume that gets created is encrypted or not.
             
         Returns:
-            CreateVolumeResult object containing values in response given by the create volume API.
+            An object of :class:`jcs_sbs_sdk.model.create_volume_result.CreateVolumeResult` that contains the details of the created volume.
         
         Raises:
-            TypeError: If 'create_volume_request' is not an instance of 'CreateVolumeRequest'.
+            TypeError: If:
+                * *size* is not a positive :obj:`int`
+                * *snapshot_id* not a :obj:`str`
+                * *volume_type* is not a :obj:`str`
+                * *encrypted* is not of type :obj:`bool`
         """
-        utils.validate_generic(create_volume_request, "create_volume_request", CreateVolumeRequest)
+        
+        create_volume_request = CreateVolumeRequest()
+        
+        if size is not None:
+            create_volume_request.size = size
+            
+        if snapshot_id is not None:
+            create_volume_request.snapshot_id = snapshot_id
+            
+        if volume_type is not None:
+            create_volume_request.volume_type = volume_type
+            
+        if encrypted is not None:
+            create_volume_request.encrypted = encrypted
+        
+        
         query_params = {}
         query_params["Action"] = "CreateVolume"
         if create_volume_request.size != None:
@@ -172,20 +226,22 @@ class JCSComputeClient(JCSHttpClient):
             response.close()   
 
     
-    def delete_volume(self, delete_volume_request):
+    def delete_volume(self, volume_id):
         """
-        Deletes the volume with volume_id given in the DeleteVolumeRequest object.
+        Deletes the snapshot with snapshot_id given in the argument.
         
         Args:
-            delete_volume_request (DeleteVolumeRequest): An object of DeleteVolumeRequest containing values required in create volume API.
-            
+            snapshot_id (:obj:`str`): ID of the snapshot to delete.
+                        
         Returns:
-            DeleteVolumeResult object containing values in response given by the delete volume API.
+            An object of :class:`jcs_sbs_sdk.model.delete_snapshot_result.DeleteSnapshotResult` indicating if snapshot is deleted or not.
         
         Raises:
-            TypeError: If 'delete_volume_request' is not an instance of 'DeleteVolumeRequest'.
+            TypeError: If *snapshot_id* is not of type :obj:`str`.
         """
-        utils.validate_generic(delete_volume_request, "delete_volume_request", DeleteVolumeRequest)
+        delete_volume_request = DeleteVolumeRequest()
+        delete_volume_request.volume_id = volume_id
+        
         query_params = {}
         query_params["Action"] = "DeleteVolume"
         query_params["VolumeId"] = utils.validate_string(delete_volume_request.volume_id, "volume_id")
@@ -207,21 +263,49 @@ class JCSComputeClient(JCSHttpClient):
             response.close()
         
         
-    def describe_snapshots(self, describe_snapshots_request):
+    def describe_snapshots(self, snapshot_ids=None, next_token=None, max_results=None, detail=None):
         """
-        Returns a list of Snapshots according to the filters set in the DescribeSnapshotsRequest object.
+        Returns an object of the :class:`jcs_sbs_sdk.model.describe_snapshots_result.DescribeSnapshotsResult` containing the 
+        :obj:`list` of :class:`jcs_sbs_sdk.model.snapshot.Snapshot` according to the corresponding internal API response.
         
         Args:
-            describe_snapshots_request (DescribeSnapshotsRequest): An object of DescribeSnapshotsRequest containing values required
-                in describe snapshots API.
+            snapshot_ids (:obj:`list` of :obj:`str`, optional, default = None): IDs of specific snapshot to be described.
+            
+            next_token (:obj:`str`, optional, default = None): ID of last snapshot in the previous call of the describe_snapshots() method.
+                Previously, if the describe_snapshots() method is called with 'max_results' option, all items are not returned.
+                To get the next set of snapshots, pass the ID of the last snapshot as 'next_token' in the subsequent call to the describe_snapshots() method.
                 
+            max_results (:obj:`int`, optional, default = None): Maximum number of snapshots to describe.
+                To get the next set of snapshots, pass the ID of the last snapshot as 'next_token' in the subsequent call to the describe_snapshots() method.
+            
+            detail (:obj:`bool`, optional, default = None): Set *True* to describe the snapshots in detail.
+        
         Returns:
-            DescribeSnapshotsResult object containing list of Snapshots as returned by the describe snapshot API.
+            An object of the :class:`jcs_sbs_sdk.model.describe_snapshots_result.DescribeSnapshotsResult` containing the 
+            :obj:`list` of :class:`jcs_sbs_sdk.model.snapshot.Snapshot` according to the corresponding internal API response.
         
         Raises:
-            TypeError: If 'describe_snapshots_request' is not an instance of DescribeSnapshotsResult.
+            TypeError: If:
+                * *snapshot_ids* is not a :obj:`list` of :obj:`str`
+                * *next_token* is not of type :obj:`str`
+                * *max_results* is not of type :obj:`int`
+                * *detail* is not of type :obj:`bool`
         """
-        utils.validate_generic(describe_snapshots_request, "describe_snapshots_request", DescribeSnapshotsRequest)
+        
+        describe_snapshots_request = DescribeSnapshotsRequest()
+        
+        if snapshot_ids is not None:
+            describe_snapshots_request.snapshot_ids = snapshot_ids
+            
+        if next_token is not None:
+            describe_snapshots_request.next_token = next_token
+            
+        if max_results is not None:
+            describe_snapshots_request.max_results = max_results
+            
+        if detail is not None:
+            describe_snapshots_request.detail = detail
+
         query_params = {}
         query_params["Action"] = "DescribeSnapshots"
         if describe_snapshots_request.max_results != None:
@@ -263,7 +347,7 @@ class JCSComputeClient(JCSHttpClient):
         finally:
             response.close()
 
-    def delete_snapshot(self, delete_snapshot_request):
+    def delete_snapshot(self, snapshot_id):
         """
         Deletes the snapshot with snapshot_id given in the DeleteSnapshotRequest object.
         
@@ -276,7 +360,9 @@ class JCSComputeClient(JCSHttpClient):
         Raises:
             TypeError: If 'delete_snapshot_request' is not an instance of 'DeleteSnapshotRequest'.
         """
-        utils.validate_generic(delete_snapshot_request, "delete_snapshot_request", DeleteSnapshotRequest)
+        delete_snapshot_request = DeleteSnapshotRequest()
+        delete_snapshot_request.snapshot_id = snapshot_id
+        
         query_params = {}
         query_params["Action"] = "DeleteSnapshot"
         query_params["SnapshotId"] = utils.validate_string(delete_snapshot_request.snapshot_id, "snapshot_id")
@@ -298,20 +384,23 @@ class JCSComputeClient(JCSHttpClient):
             response.close()
         
 
-    def create_snapshot(self, create_snapshot_request):
+    def create_snapshot(self, volume_id):
         """
-        Creates a snapshot with specifications given in the CreateSnapshotRequest object.
+        Creates a snapshot according to the arguments passed to this method and returns an object of :class:`jcs_sbs_sdk.model.create_snapshot_result.CreateSnapshotResult`.
         
         Args:
-            create_snapshot_request (CreateSnapshotRequest): An object of CreateSnapshotRequest containing values required in create snapshot API.
-            
+            volume_id (:obj:`str`): ID of volume from which the snapshot gets created.
+          
         Returns:
-            CreateSnapshotResult object containing values in response given by the create snapshot API.
+            An object of :class:`jcs_sbs_sdk.model.create_snapshot_result.CreateSnapshotResult` that contains the details of the created snapshot.
         
         Raises:
-            TypeError: If 'create_snapshot_request' is not an instance of 'CreateSnapshotRequest'.
+            TypeError: If *volume_id* not of type :obj:`str`
         """
-        utils.validate_generic(create_snapshot_request, "create_snapshot_request", CreateSnapshotRequest)
+        
+        create_snapshot_request = CreateSnapshotRequest()
+        create_snapshot_request.volume_id = volume_id
+        
         query_params = {}
         query_params["Action"] = "CreateSnapshot"
         query_params["VolumeId"] = utils.validate_string(create_snapshot_request.volume_id, "volume_id")

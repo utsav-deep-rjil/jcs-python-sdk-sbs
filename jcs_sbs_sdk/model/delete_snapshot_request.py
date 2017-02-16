@@ -3,10 +3,10 @@ from ..common import utils
 
 class DeleteSnapshotRequest(JCSRequest):
     """
-    Request class for delete snapshot operation.
+    Request class for the delete snapshot operation.
     
     Attributes:
-        snapshot_id (str): ID of the snapshot to be deleted.
+        snapshot_id (:obj:`str`): ID of the snapshot to delete.
     """
     def __init__(self):
         self._snapshot_id = None
@@ -14,7 +14,7 @@ class DeleteSnapshotRequest(JCSRequest):
 
     @property
     def snapshot_id(self):
-        """ID of the snapshot to be deleted (string)."""
+        """(:obj:`str`) ID of the snapshot to delete."""
         return self._snapshot_id
 
     @snapshot_id.setter

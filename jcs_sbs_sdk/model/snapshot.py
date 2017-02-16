@@ -7,17 +7,17 @@ class Snapshot:
     Model class for a snapshot.
     
     Attributes:
-        volume_id (str): ID of volume from which snapshot is created.
+        volume_id (:obj:`str`): ID of the volume from which the snapshot is created.
         
-        volume_size (positive int): Size of source volume.
+        volume_size (positive :obj:`int`): Size of the source volume.
         
-        snapshot_id (str): ID of this snapshot.
+        snapshot_id (:obj:`str`): ID of the snapshot.
         
-        encrypted (bool): Indicates if the snapshot is encrypted or not.
+        encrypted (:obj:`bool`): Indicates if the snapshot is encrypted or not.
         
-        status (str): Current status of the snapshot. Possible values are: pending, completed and error.
+        status (:obj:`str`): Current status of the snapshot. Possible values are: *pending*, *completed* and *error*.
         
-        start_time (datetime): datetime value at which snapshot was created.
+        start_time (:obj:`datetime`): The datetime value at the which snapshot is created.
     """
     def __init__(self):
         self._volume_id = None
@@ -29,7 +29,7 @@ class Snapshot:
 
     @property
     def volume_id(self):
-        """ID of the JCS Volume (string)"""
+        """(:obj:`str`) ID of the volume from which the snapshot gets created."""
         return self._volume_id
 
     @volume_id.setter
@@ -42,7 +42,7 @@ class Snapshot:
         
     @property
     def volume_size(self):
-        """Size of the volume (int)"""
+        """(positive :obj:`int`) Size of the source volume."""
         return self._volume_size
 
     @volume_size.setter
@@ -55,7 +55,7 @@ class Snapshot:
     
     @property
     def snapshot_id(self):
-        """ID of snapshot from which the volume was created. """
+        """(:obj:`str`) ID of the snapshot."""
         return self._snapshot_id
 
     @snapshot_id.setter
@@ -68,7 +68,7 @@ class Snapshot:
     
     @property
     def encrypted(self):
-        """Boolean value indicating if volume is encrypted or not."""
+        """(:obj:`bool`) Indicates if the snapshot is encrypted or not."""
         return self._encrypted
 
     @encrypted.setter
@@ -81,7 +81,7 @@ class Snapshot:
     
     @property
     def status(self):
-        """Current status of the volume (string)."""
+        """(:obj:`str`) Current status of the snapshot. Possible values are: *pending*, *completed* and *error*."""
         return self._status
 
     @status.setter
@@ -94,7 +94,7 @@ class Snapshot:
         
     @property
     def start_time(self):
-        """Time at which snapshot is created."""
+        """(:obj:`datetime`) Time at which the snapshot is created."""
         return self._start_time
 
     @start_time.setter

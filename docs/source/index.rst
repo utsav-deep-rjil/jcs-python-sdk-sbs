@@ -3,10 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to JCS SBS Python SDK's documentation!
-==============================================
+JCS SBS Python SDK Documentation
+================================
+
+Introduction:
+-------------
+
+The JCS-SBS (Jio Cloud Services - Simple Block Storage) SDK for Python provides service methods for accessing the APIs provided by JCS-SBS. 
+For more information on JCS Services, Console, APIs, and CLIs, see the `JCS Documentation <www.jiocloudservices.com/documentation.html>`_.
+
 
 Contents:
+---------
 
 .. toctree::
    :maxdepth: 4

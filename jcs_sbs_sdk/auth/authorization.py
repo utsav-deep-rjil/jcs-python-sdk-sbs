@@ -15,16 +15,18 @@ from ..common import utils
 class Authorization(object):
     '''
         Class containing methods responsible for adding authorization parameters in the API request.
-        The constructor of this class accepts the arguments given below.
+        The methods of this class are used internally.
+        
+        The constructor of this class accepts the following arguments.
          
         Args:
-            url (str): Request URL to which authorization parameters are to be added.
+            url (:obj:`str`): Request URL to which authorization parameters are added.
             
-            request_method (str): Request method of the target API.
+            request_method (:obj:`str`): Request method of the target API.
             
-            credentials (Credentials): an instance of Credentials object containing access and secret keys.
+            credentials (:class:`jcs_sbs_sdk.auth.credentials.Credentials`): An object of :class:`jcs_sbs_sdk.auth.credentials.Credentials` that contains access and secret keys.
             
-            headers (dict): Common headers that are to be added to any API request.
+            headers (:obj:`dict`): Common headers to add to any API request.
         '''
         
     def __init__(self, url, request_method, credentials, headers):
@@ -49,15 +51,15 @@ class Authorization(object):
         
     def add_params(self, query_params):
         '''
-        Sets required common parameters, such as JCSAccessKeyId,
-        SignatureVersion, SignatureMethod and so on that is used
+        Sets the required common parameters such as JCSAccessKeyId,
+        SignatureVersion, SignatureMethod, etc., that are used
         to create request URL.
         
         Args:
-            query_params (dict): Query parameters that are to be added to API request
+            query_params (:obj:`dict`): Query parameters to add to the API request
         
         Raises:
-            TypeError: If query_param is not of type dict
+            TypeError: If query_param is not of type :obj:`dict`
         '''
         utils.validate_generic(query_params, "query_params", type({}))
         query_params["JCSAccessKeyId"] = self._credentials.access_key
@@ -78,8 +80,8 @@ class Authorization(object):
         Returns the UTF8-encoded version of a value.
         
         Args:
-            value (str): The string value to be converted to UTF8.
-                If the given value is not a string then the given value is first converted to str.
+            value (:obj:`str`): The string value to be converted to UTF8.
+                If the given value is not a string then the given value is first converted to :obj:`str`.
                 
         Returns:
             The UTF8-encoded version of a value.
@@ -93,13 +95,13 @@ class Authorization(object):
     
     def serialize_params(self, query_params):
         '''
-        Creates URL encoded string such that keys are in sorted order.
+        Creates URL encoded string having alphabetically sorted keys.
         
         Args:
-            query_params (dict): Query parameters for the API request.
+            query_params (:obj:`dict`): Query parameters to add to the API request.
         
         Raises:
-            TypeError: If 'query_params' is not a dict.
+            TypeError: If *query_params* is not a :obj:`dict`.
         '''
         utils.validate_generic(query_params, "query_params", type({}))
         keys = list(query_params)
@@ -115,13 +117,13 @@ class Authorization(object):
         Generates the request string that needs to be signed.
          
         Args:
-            query_params (dict): Query parameters for the API request.
+            query_params (:obj:`dict`): Query parameters to add to the API request.
         
         Returns:
             Request String that needs to be signed.
             
         Raises:
-            TypeError: If 'query_params' is not a 'dict'.
+            TypeError: If *query_params* is not a :obj:`dict`.
         '''
         utils.validate_generic(query_params, "query_params", type({}))
         signature_strings = [self._verb, "\n", self._host]
@@ -134,13 +136,13 @@ class Authorization(object):
     
     def add_auth(self, query_params):
         '''
-        Adds signature to the 'query_params' dict.
+        Adds signature to the *query_params* :obj:`dict`.
          
         Args:
-            query_params (dict): Query parameters for the API request.
+            query_params (:obj:`dict`): Query parameters to add to the API request.
             
         Raises:
-            TypeError: If 'query_params' is not a 'dict'.
+            TypeError: If *query_params* is not a :obj:`dict`.
         '''
         utils.validate_generic(query_params, "query_params", type({}))
         hmac_256 = hmac.new(self._credentials.secret_key, digestmod=hashlib.sha256)

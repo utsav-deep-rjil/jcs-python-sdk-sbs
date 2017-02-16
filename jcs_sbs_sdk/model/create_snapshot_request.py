@@ -6,7 +6,7 @@ class CreateSnapshotRequest(JCSRequest):
     Request class for create snapshot operation.
     
     Attributes:
-        volume_id (str): ID of volume from which the snapshot is to be created.
+        volume_id (:obj:`str`): ID of the volume from which the snapshot gets created.
     """
     def __init__(self):
         self._volume_id = None
@@ -14,7 +14,7 @@ class CreateSnapshotRequest(JCSRequest):
 
     @property
     def volume_id(self):
-        """ID of volume from which the snapshot is to be created."""
+        """(:obj:`str`) ID of the volume from which the snapshot gets created."""
         return self._volume_id
 
     @volume_id.setter

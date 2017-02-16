@@ -5,9 +5,9 @@ class JCSResult(object):
     Parent class for all the result classes. Contains common attributes present in any result class.
     
     Attributes:
-        request_id (str): Request ID returned by backend API.
+        request_id (:obj:`str`): Request ID returned by the internal API.
         
-        xml (str): Actual XML response returned by the backend API.
+        xml (:obj:`str`): Actual XML response returned by the internal API.
     """
     def __init__(self):
         self._request_id = None
@@ -15,7 +15,7 @@ class JCSResult(object):
 
     @property
     def request_id(self):
-        """The ID of the request sent to the internal API."""
+        """(:obj:`str`) The ID of the request sent to the internal API."""
         return self._request_id
 
     @request_id.setter
@@ -28,7 +28,7 @@ class JCSResult(object):
         
     @property
     def xml(self):
-        """XML response returned by internal API"""
+        """(:obj:`str`) XML response returned by the internal API"""
         return self._xml
 
     @xml.setter

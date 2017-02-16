@@ -6,21 +6,16 @@ class DescribeVolumesRequest(JCSRequest):
     Request class for describe volumes operation.
     
     Attributes:
-        volume_ids (list of str): IDs of specific volume to be described.
+        volume_ids (:obj:`list` of :obj:`str`): IDs of specific volume to be described.
         
-        next_token (str): ID of last volume in the previous call of describe_volume method.
-            If the describeVolumes() method was called with a MaxResults option,
-            all items would not have been returned. So, the previous call of
-            describeVolumes() method returns 'nextToken' to get next set of items.
-            This is basically the Id of the last seen item from the previous call.
-            The describeVolumes() will return the next set of items after this Id
-            and the new value of 'nextToken'
+        next_token (:obj:`str`): ID of last volume in the previous call of the describe_volumes() method.
+            Previously, if the describe_volumes() method is called with 'max_results' option, all items are not returned.
+            To get the next set of volumes, pass the ID of the last volume as 'next_token' in the subsequent call to the describe_volumes() method.
             
-        max_results (int): Maximum number of volumes to be described.
-            To get the next set of volumes, ID of the last volume should be passed as 'next_token'
-            in next call of describe volume.
+        max_results (:obj:`int`): Maximum number of volumes to describe.
+            To get the next set of volumes, pass the ID of the last volume as 'next_token' in the subsequent call to the describe_volumes() method.
         
-        detail (bool): If 'detail' is set to 'True', then the volumes will be described in detail.
+        detail (:obj:`bool`): Set *True* to describe the snapshots in detail.
     """
     def __init__(self):
         self._volume_ids = None
@@ -31,7 +26,7 @@ class DescribeVolumesRequest(JCSRequest):
 
     @property
     def volume_ids(self):
-        """List of volume IDs (string)."""
+        """(:obj:`list` of :obj:`str`) List of volume IDs."""
         return self._volume_ids
 
     @volume_ids.setter
@@ -44,7 +39,7 @@ class DescribeVolumesRequest(JCSRequest):
         
     @property
     def next_token(self):
-        """Last volume Id (string) returned by previous call of describe_volume method. """
+        """(:obj:`str`) ID of the last volume returned by the previous call of the describe_volumes() method. """
         return self._next_token
 
     @next_token.setter
@@ -57,7 +52,7 @@ class DescribeVolumesRequest(JCSRequest):
     
     @property
     def max_results(self):
-        """Maximum number of volumes to be described"""
+        """(:obj:`int`) Maximum number of volumes to describe."""
         return self._max_results
 
     @max_results.setter
@@ -70,7 +65,7 @@ class DescribeVolumesRequest(JCSRequest):
     
     @property
     def detail(self):
-        """Boolean value indicating if details will be shown in response or not."""
+        """(:obj:`bool`) Set *True* to describe the snapshots in detail."""
         return self._detail
 
     @detail.setter

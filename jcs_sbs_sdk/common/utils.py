@@ -11,15 +11,15 @@ type_error_message = "%s must be of type %s."
     
 def validate_string(value, name):
     """
-    Validates if the given 'value' is a string or not. If the value is a string, it returns the trimmed value.
+    Validates if the given *value* is a string or not. If the value is a string, it returns the trimmed value.
     
     Args:
-        value (str): The 'value' to be tested.
+        value (:obj:`str`): The value that needs validation.
         
-        name (str): The name of the given value used in the error message.
+        name (:obj:`str`): The name of the given value used in the error message.
         
     Raises:
-        TypeError: If the given 'value' is not a string.
+        TypeError: If the given *value* is not a :obj:`str`.
     """
     if not isinstance(value, str):
         raise TypeError(type_error_message % (name, "str"))
@@ -31,15 +31,15 @@ def validate_string(value, name):
 
 def validate_positive_int(value, name):
     """
-    Validates if the given 'value' is a positive integer or not.
+    Validates if the given *value* is a positive integer or not.
     
     Args:
-        value (+ve int): The 'value' to be tested.
+        value (+ve :obj:`int`): The value that needs validation.
         
-        name (str): The name of the given 'value' used in the error message.
+        name (:obj:`str`): The name of the given *value* used in the error message.
         
     Raises:
-        TypeError: If the given 'value' is not a positive integer.
+        TypeError: If the given *value* is not a positive :obj:`int`.
     """
     if not isinstance(value, int):
         raise TypeError(type_error_message % (name, "int"))
@@ -50,15 +50,15 @@ def validate_positive_int(value, name):
 
 def validate_generic(value, name, element_type):
     """
-    Validates if the given 'value' is an instance of 'element_type' or not.
+    Validates if the given *value* is an instance of 'element_type' or not.
     
     Args:
-        value: The 'value' to be tested.
+        value: The value that needs validation.
         
-        name (str): The name of the given 'value' used in the error message.
+        name (:obj:`str`): The name of the given *value* used in the error message.
         
     Raises:
-        TypeError: If the given 'value' is not of type 'element_type'.
+        TypeError: If the given *value* is not of type 'element_type'.
     """
     if type(value) != element_type:
         raise TypeError(type_error_message % (name, str(element_type)))
@@ -67,15 +67,15 @@ def validate_generic(value, name, element_type):
 
 def validate_list(value, name, element_type):
     """
-    Validates if the given 'value' is a list or not.
+    Validates if the given *value* is a list or not.
     
     Args:
-        value: The 'value' to be tested.
+        value (:obj:`list`): The value that needs validation.
         
-        name (str): The name of the given 'value' used in the error message.
+        name (:obj:`str`): The name of the given *value* used in the error message.
         
     Raises:
-        TypeError: If the given 'value' is not of type 'element_type'.
+        TypeError: If the given *value* is not a :obj:`list` of given 'element_type' type.
     """
     if not isinstance(value, list) and all(type(element) == element_type for element in value):
         raise TypeError("%s must be a list having each element of type %s" % (name, str(element_type)))
@@ -84,14 +84,14 @@ def validate_list(value, name, element_type):
 
 def get_protocol_and_host(url):
     """
-    Splits protocol and host from given 'url' and returns a dict having keys 'protocol' and 'host'.
-    If the given value of 'url' is not a valid URL then values of 'protocol' and 'host' are set to empty strings.
-    
+    Splits the protocol and host portions from the given *url* and returns a :obj:`dict` containing the *protocol* and *host* keys.
+    If the given value of the *url* is not valid, then the values of the *protocol* and *host* keys are set to empty strings.
+
     Args:
-        url (str): The url whose 'protocol' and 'host' needs to be found.
+        url (:obj:`str`): The URL from which the *protocol* and *host* values are extracted.
         
     Returns:
-        A dict containing 'protocol' and 'host' values.
+        (:obj:`dict`) A dict containing  *protocol* and *host* keys.
     """
     protocol_and_host = {}
     compiled_regex = re.compile(constants.PROTOCOL_AND_HOST_REGEX)
@@ -107,10 +107,10 @@ def get_protocol_and_host(url):
 
 def get_config():
     """
-    Returns an instance of ConfigParser object that reads values from 'fixtures/config.properties' file.
+    Returns an instance of :class:`ConfigParser` object that reads values from 'fixtures/config.properties' file.
     
     Returns:
-        An instance of ConfigParser object.
+        An instance of :class:`ConfigParser` object.
     """
     
     ROOT = os.path.dirname(__file__)
@@ -120,4 +120,5 @@ def get_config():
         config.read(config_path)
     else:
         LOG.warn("%s not found",config_path)
+        return None
     return config

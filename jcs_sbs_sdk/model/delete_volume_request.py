@@ -3,10 +3,10 @@ from ..common import utils
 
 class DeleteVolumeRequest(JCSRequest):
     """
-    Request class for delete volume operation.
+    Request class for the delete volume operation.
     
     Attributes:
-        volume_id (str): ID of volume to be deleted.
+        volume_id (:obj:`str`): ID of the volume to delete.
     """
     def __init__(self):
         self._volume_id = None
@@ -14,7 +14,7 @@ class DeleteVolumeRequest(JCSRequest):
 
     @property
     def volume_id(self):
-        """ID of the volume to be deleted (string)."""
+        """(:obj:`str`) ID of the volume to delete."""
         return self._volume_id
 
     @volume_id.setter

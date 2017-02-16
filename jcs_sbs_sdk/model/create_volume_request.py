@@ -6,10 +6,13 @@ class CreateVolumeRequest(JCSRequest):
     Request class for create volume operation.
     
     Attributes:
-        size (int): Size of the volume.
-        snapshot_id (str): ID of snapshot from which the volume is to be created.
-        volume_type (str): Type of the volume to be created. The types can be 'standard' or 'ms1' 
-        encrypted (bool): Indicates if created volume will be encrypted or not.
+        size (positive :obj:`int`): Size of the volume.
+        
+        snapshot_id (:obj:`str`): ID of snapshot from which the volume gets created.
+        
+        volume_type (:obj:`str`): Type of the volume, 'standard' or 'ms1', to create. 
+        
+        encrypted (:obj:`bool`): Indicates if the volume that gets created is encrypted or not.
     """
     def __init__(self):
         self._size = None
@@ -20,7 +23,7 @@ class CreateVolumeRequest(JCSRequest):
 
     @property
     def size(self):
-        """Size of the Volume (int)"""
+        """(positive :obj:`int`) Size of the Volume"""
         return self._size
 
     @size.setter
@@ -33,7 +36,7 @@ class CreateVolumeRequest(JCSRequest):
         
     @property
     def snapshot_id(self):
-        """ID of snapshot from which the volume is to be created."""
+        """(:obj:`str`) ID of snapshot from which the volume gets created."""
         return self._snapshot_id
 
     @snapshot_id.setter
@@ -46,7 +49,7 @@ class CreateVolumeRequest(JCSRequest):
     
     @property
     def volume_type(self):
-        """Type of the volume (str). The types can be 'standard' or 'ms1' """
+        """(:obj:`str`) Type of the volume. Possible values are 'standard' and 'ms1'."""
         return self._volume_type
 
     @volume_type.setter
@@ -59,7 +62,7 @@ class CreateVolumeRequest(JCSRequest):
     
     @property
     def encrypted(self):
-        """Boolean value indicating if volume is encrypted or not."""
+        """(:obj:`bool`) Indicates if volume that gets created is encrypted or not."""
         return self._encrypted
 
     @encrypted.setter

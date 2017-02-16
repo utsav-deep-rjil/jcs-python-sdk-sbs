@@ -6,11 +6,10 @@ class JCSRequest(object):
     Parent class for all the request classes. Contains the common attributes for all the requests.
     
     Attributes:
-        credentials (Credentials): An instance of Credentials object containing access and secret keys,
-            which is required for sending any request.
+        credentials (:obj:`jcs_sbs_sdk.auth.credentials.Credentials`): An object of the Credentials class that contains access and secret keys,
+            that are required for sending any request.
         
-        custom_request_headers (dict): Stores some custom headers,
-            required for sending any request to the backend API, in a dictionary.
+        custom_request_headers (:obj:`dict`): Stores some custom headers in a :obj:`dict`, required to send any request to the internal APIs.
     """
     def __init__(self):
         self._credentials = None
@@ -18,7 +17,7 @@ class JCSRequest(object):
     
     @property
     def credentials(self):
-        """Credentials object containing ACCESS_KEY and SECRET_KEY."""
+        """(:obj:`jcs_sbs_sdk.auth.credentials.Credentials`) Credentials object containing the ACCESS_KEY and the SECRET_KEY."""
         return self._credentials
 
     @credentials.setter
@@ -31,7 +30,7 @@ class JCSRequest(object):
         
     @property
     def custom_request_headers(self):
-        """custom headers required for sending request to backend API"""
+        """(:obj:`dict`) Custom headers required to send any request to the internal APIs"""
         return self._custom_request_headers
 
     @custom_request_headers.setter

@@ -1,8 +1,10 @@
 jcs_sbs_sdk.auth package
 ========================
 
-Submodules
-----------
+.. automodule:: jcs_sbs_sdk.auth
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 jcs_sbs_sdk.auth.authorization module
 -------------------------------------
@@ -21,10 +23,4 @@ jcs_sbs_sdk.auth.credentials module
     :show-inheritance:
 
 
-Module contents
----------------
 
-.. automodule:: jcs_sbs_sdk.auth
-    :members:
-    :undoc-members:
-    :show-inheritance:
