@@ -29,7 +29,7 @@ CA-CERTIFICATE INSTALLATION:
 (replace `<certificate>` with location of the `.crt` file).
 
 - For Windows :
-Follow the steps given in this [link](http://www.sqlservermart.com/HowTo/Windows_Import_Certificate.aspx)
+Follow the steps given in this [link](http://www.sqlservermart.com/HowTo/Windows_Import_Certificate.aspx).
 
 
 Installing the project:
@@ -53,12 +53,12 @@ But it is recommended to install the project inside a virtual environment. Also,
 *Windows:*
 
 - 
-Follow the steps given in this [link](http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html)
+Follow the steps given in this [link](http://pymote.readthedocs.io/en/latest/install/windows_virtualenv.html).
 
 
-**Installing the project in virtual environment**
+**Installing the project in virtual environment:**
 
-- Now in virtualenv, go to the project's root directory and run the command
+- Now in the activated virtualenv, go to the project's root directory and run the command
 `python setup.py install` to install the SDK.
 
 
@@ -74,7 +74,7 @@ The following properties must be set for proper working of this SDK:
 
 You can set these properties in any of the following locations:
 
-- OS Environment Variables
+- OS Environment Variables.
 - In 
 `config.properties` file under `fixtures` folder of this project. The content of this file should be like this:
 
