@@ -7,7 +7,13 @@ For more information on JCS Services, Console, APIs, and CLIs, see JCS Document
 To use it download or clone this project and then install it in your system (or in virtual environment).
 After that you can import the classes and services of this SDK in your python project.
 
-To generate documentation, go to docs folder of the project and run `make html` in the terminal.
+To generate documentation:
+
+- Run 
+`pip install -r requirements-docs.txt` in root directory of the project.
+
+- Then go to docs folder of the project and run `make html` in the terminal.
+
 To view the documentation, go to `docs/build/html` folder and double click the index.html.
 
 Some basic examples for using the SDK is given in this README itself.
